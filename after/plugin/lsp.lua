@@ -17,7 +17,7 @@ end)
 
 require('mason').setup({})
 require('mason-lspconfig').setup({
-    ensure_installed = { 'tsserver', 'rust_analyzer', 'cssls', 'denols', 'dockerls', 'eslint', 'golangci_lint_ls', 'gopls', 'graphql', 'html', 'htmx', 'jsonls', 'jqls', 'kotlin_language_server', 'lua_ls', 'marksman', 'spectral', 'jedi_language_server', 'sqlls', 'svelte', 'templ', 'yamlls' },
+    ensure_installed = { 'tsserver', 'rust_analyzer', 'cssls', 'dockerls', 'eslint', 'golangci_lint_ls', 'gopls', 'graphql', 'html', 'htmx', 'jsonls', 'jqls', 'kotlin_language_server', 'lua_ls', 'marksman', 'spectral', 'jedi_language_server', 'sqlls', 'svelte', 'templ', 'yamlls' },
     handlers = {
         lsp_zero.default_setup,
         lua_ls = function()
@@ -37,6 +37,22 @@ require('mason-lspconfig').setup({
                         usePlaceholders = true,
                     },
                 },
+            })
+        end,
+        tsserver = function()
+            local on_attach = function(client, bufnr)
+                if client.server_capabilities.documentFormattingProvider then
+                    vim.api.nvim_create_autocmd("BufWritePre", {
+                        group = vim.api.nvim_create_augroup("Format", { clear = true }),
+                        buffer = bufnr,
+                        callback = function() vim.lsp.buf.formatting_seq_sync() end
+                    })
+                end
+            end
+            require('lspconfig').tsserver.setup({
+                on_attach = on_attach,
+                filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
+                cmd = { "typescript-language-server", "--stdio" }
             })
         end
     }
