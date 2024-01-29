@@ -24,19 +24,22 @@ return require('packer').startup(function(use)
         run = function()
             local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
             ts_update()
-        end,}
-        use("nvim-treesitter/playground")
-        use("theprimeagen/harpoon")
-        use("mbbill/undotree")
-        use("tpope/vim-fugitive")
-        use {
-            'VonHeikemen/lsp-zero.nvim',
-            branch = 'v3.x',
-            requires = {
-                --- Uncomment the two plugins below if you want to manage the language servers from neovim
-                --- and read this: https://github.com/VonHeikemen/lsp-zero.nvim/blob/v3.x/doc/md/guides/integrate-with-mason-nvim.md
-                {'williamboman/mason.nvim'},
-                {'williamboman/mason-lspconfig.nvim'},
+        end,
+    }
+    use 'ray-x/go.nvim'
+    use 'ray-x/guihua.lua' -- recommended if need floating window support
+    use("nvim-treesitter/playground")
+    use("theprimeagen/harpoon")
+    use("mbbill/undotree")
+    use("tpope/vim-fugitive")
+    use {
+        'VonHeikemen/lsp-zero.nvim',
+        branch = 'v3.x',
+        requires = {
+            --- Uncomment the two plugins below if you want to manage the language servers from neovim
+            --- and read this: https://github.com/VonHeikemen/lsp-zero.nvim/blob/v3.x/doc/md/guides/integrate-with-mason-nvim.md
+            {'williamboman/mason.nvim'},
+            {'williamboman/mason-lspconfig.nvim'},
 
                 -- LSP Support
                 {'neovim/nvim-lspconfig'},
