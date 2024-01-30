@@ -29,7 +29,7 @@ return require('packer').startup(function(use)
         end,
     }
     use 'mfussenegger/nvim-dap'
-    use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
+    use { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } }
     use "theHamsta/nvim-dap-virtual-text"
     use 'ray-x/go.nvim'
     use 'ray-x/guihua.lua' -- recommended if need floating window support
@@ -59,4 +59,11 @@ return require('packer').startup(function(use)
         require("toggleterm").setup()
     end }
     use "nvim-lua/plenary.nvim"
+    use "JoosepAlviste/nvim-ts-context-commentstring"
+    use {
+        'numToStr/Comment.nvim',
+        config = function()
+            require('Comment').setup()
+        end
+    }
 end)
