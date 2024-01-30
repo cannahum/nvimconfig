@@ -11,6 +11,9 @@ return require('packer').startup(function(use)
         -- optional for icon support
         requires = { "nvim-tree/nvim-web-devicons" }
     }
+    use { "folke/trouble.nvim",
+        requires = { "nvim-tree/nvim-web-devicons" }
+    }
     use({
         'rose-pine/neovim',
         as = 'rose-pine',
@@ -25,6 +28,9 @@ return require('packer').startup(function(use)
             ts_update()
         end,
     }
+    use 'mfussenegger/nvim-dap'
+    use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
+    use "theHamsta/nvim-dap-virtual-text"
     use 'ray-x/go.nvim'
     use 'ray-x/guihua.lua' -- recommended if need floating window support
     use("nvim-treesitter/playground")

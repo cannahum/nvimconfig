@@ -39,6 +39,8 @@ require('mason-lspconfig').setup({
                         completeUnimported = true,
                         usePlaceholders = true,
                     },
+                    dap_debug = true,
+                    dap_debug_gui = true
                 },
             })
         end,
