@@ -16,8 +16,11 @@ lsp_zero.on_attach(function(client, bufnr)
 end)
 
 require('mason').setup({})
+require('mason-tool-installer').setup({
+    ensure_installed = { 'eslint_d', 'prettierd' }
+})
 require('mason-lspconfig').setup({
-    ensure_installed = { 'tsserver', 'rust_analyzer', 'cssls', 'dockerls', 'eslint', 'golangci_lint_ls', 'gopls', 'graphql', 'html', 'htmx', 'jsonls', 'jqls', 'kotlin_language_server', 'lua_ls', 'marksman', 'spectral', 'jedi_language_server', 'sqlls', 'svelte', 'templ', 'yamlls' },
+    ensure_installed = { 'tsserver', 'rust_analyzer', 'cssls', 'dockerls', 'golangci_lint_ls', 'gopls', 'graphql', 'html', 'htmx', 'jsonls', 'jqls', 'kotlin_language_server', 'lua_ls', 'marksman', 'spectral', 'jedi_language_server', 'sqlls', 'svelte', 'templ', 'yamlls' },
     handlers = {
         lsp_zero.default_setup,
         lua_ls = function()

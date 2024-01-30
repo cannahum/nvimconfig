@@ -48,6 +48,7 @@ return require('packer').startup(function(use)
             { 'L3MON4D3/LuaSnip' },
         }
     }
+    use { "WhoIsSethDaniel/mason-tool-installer.nvim" }
     use { "akinsho/toggleterm.nvim", tag = '*', config = function()
         require("toggleterm").setup()
     end }
