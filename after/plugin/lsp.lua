@@ -20,12 +20,35 @@ require('mason-tool-installer').setup({
     ensure_installed = { 'eslint_d', 'prettierd' }
 })
 require('mason-lspconfig').setup({
-    ensure_installed = { 'tsserver', 'rust_analyzer', 'cssls', 'dockerls', 'golangci_lint_ls', 'gopls', 'graphql', 'html', 'htmx', 'jsonls', 'jqls', 'kotlin_language_server', 'lua_ls', 'marksman', 'spectral', 'jedi_language_server', 'sqlls', 'svelte', 'templ', 'yamlls' },
+    ensure_installed = { 'tsserver', 'rust_analyzer', 'cssls', 'dockerls', 'golangci_lint_ls', 'gopls', 'graphql', 'html', 'htmx', 'jsonls', 'jqls', 'kotlin_language_server', 'lua_ls', 'marksman', 'spectral', 'jedi_language_server', 'sqlls', 'svelte', 'tailwindcss', 'templ', 'yamlls' },
     handlers = {
         lsp_zero.default_setup,
         lua_ls = function()
             local lua_opts = lsp_zero.nvim_lua_ls()
             require('lspconfig').lua_ls.setup(lua_opts)
+        end,
+        templ = function()
+            require('lspconfig').templ.setup({})
+        end,
+        html = function()
+            require('lspconfig').html.setup({
+                filetypes = { "html", "templ" },
+            })
+        end,
+        htmx = function()
+            require('lspconfig').html.setup({
+                filetypes = { "html", "templ" },
+            })
+        end,
+        tailwindcss = function()
+            require('lspconfig').tailwindcss.setup({
+                filetypes = { "html", "templ" },
+                init_options = {
+                    userLanguages = {
+                        templ = "html"
+                    }
+                }
+            })
         end,
         gopls = function()
             require('lspconfig').gopls.setup({
@@ -82,3 +105,5 @@ cmp.setup({
         ['<C-Space>'] = cmp.mapping.complete(),
     }),
 })
+
+vim.filetype.add({ extension = { templ = "templ" } })
